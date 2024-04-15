@@ -9,7 +9,7 @@ export default function QuoteDisplay({quote}){
                 <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl lg:text-4xl dark:text-white">{quote.content}</h1>
                 <p className="italic text-lg m-6 px-56 text-right">{ quote.author }</p>
                 <div className="m-auto h-auto mt-20">
-                    { quote.tags.reduce(tag => { return <span className="bg-gray-300 text-gray-800 text-m font-medium me-2 px-3.5 py-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">{tag}</span>}) }
+                    { quote.tags.map(tag => <span className="bg-gray-300 text-gray-800 text-m font-medium me-2 px-3.5 py-1.5 rounded-full dark:bg-gray-700 dark:text-gray-300">{tag}</span>) }
                 </div>
             </div>
         </section>
