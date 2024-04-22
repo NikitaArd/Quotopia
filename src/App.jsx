@@ -10,7 +10,8 @@ function App() {
   const [quote, setQuote] = useState(null);
 
   useEffect(() => {
-    fetch(new Request(quoteAPI))
+    if(quote === null){
+      fetch(new Request(quoteAPI))
       .then(response => {
         if (!response.ok) {
           throw new Error("Some errors !");
@@ -36,12 +37,13 @@ function App() {
           error: error,
         });
       });
-  }, []);
+    }
+  }, [quote]);
   
   return (
     <>
       <Header />
-      { quote ? <QuoteDisplay quote={quote} /> : <Spinner />}
+      { quote ? <QuoteDisplay quote={quote} handleSetQuote={setQuote} /> : <Spinner />}
     </>
   );
 }

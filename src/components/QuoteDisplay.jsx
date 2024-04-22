@@ -1,6 +1,6 @@
 import GenerateAgain from '../assets/again.svg';
 
-export default function QuoteDisplay({quote}){
+export default function QuoteDisplay({quote, handleSetQuote}){
     return (
         <>
 
@@ -15,7 +15,7 @@ export default function QuoteDisplay({quote}){
         </section>
         
         <div className="w-full flex">
-            <button type="button" className="px-5 py-3 m-auto text-base font-medium text-center inline-flex items-center text-white bg-stone-600 rounded-lg hover:bg-stone-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button onClick={() => handleSetQuote(null)} type="button" className="px-5 py-3 m-auto text-base font-medium text-center inline-flex items-center text-white bg-stone-600 rounded-lg hover:bg-stone-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 <img src={GenerateAgain} className='w-6 h-6 me-2' />
                 Generate another
             </button>
