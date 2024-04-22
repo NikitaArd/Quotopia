@@ -20,8 +20,6 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        console.log(data)
-  
         setQuote({
           content: data.content,
           author: data.author,
