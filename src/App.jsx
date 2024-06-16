@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import QuoteDisplay from "./components/QuoteDisplay";
 import Spinner from "./components/Spinner";
+import QuoteHistory from "./components/QuoteHistory";
 
 const quoteAPI = "https://api.quotable.io/random";
 
@@ -42,6 +43,7 @@ function App() {
     <>
       <Header />
       { quote ? <QuoteDisplay quote={quote} handleSetQuote={setQuote} /> : <Spinner />}
+      <QuoteHistory />
     </>
   );
 }
