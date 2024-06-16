@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 
 
 import Header from "./components/Header";
@@ -8,11 +8,20 @@ import QuoteHistoryButton from "./components/QuoteHistoryButton";
 import { QuoteHistory } from "./components/QuoteHistory";
 
 
+import { QuoteHistoryContext } from "./store/quote-history-context";
+
+
 const quoteAPI = "https://api.quotable.io/random";
 
 
 function App() {
   const [quote, setQuote] = useState(null);
+  const quoteHistory = useContext(QuoteHistoryContext);
+
+  function handleSetQuote(quote){
+    quoteHistory.appendQuote(quote);
+    setQuote(quote);
+  }
 
   useEffect(() => {
     if(quote === null){
@@ -25,7 +34,7 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        setQuote({
+        handleSetQuote({
           content: data.content,
           author: data.author,
           tags: data.tags,

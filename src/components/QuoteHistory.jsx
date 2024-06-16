@@ -1,8 +1,11 @@
-import { useImperativeHandle, forwardRef, useRef } from "react";
+import { useImperativeHandle, forwardRef, useRef, useContext } from "react";
 
+import { QuoteHistoryContext } from "../store/quote-history-context";
 
 export const QuoteHistory = forwardRef(function QuoteHistoryModal(props, ref) {
   const dialog = useRef();
+
+  const quoteContext = useContext(QuoteHistoryContext);
 
   useImperativeHandle(ref, () => {
     return {
@@ -15,30 +18,18 @@ export const QuoteHistory = forwardRef(function QuoteHistoryModal(props, ref) {
       <div className="modal-box">
         <h1 className="text-2xl font-bold">History</h1>
         <ul className="w-11/12 max-h-96 h-fit overflow-auto my-7 mx-auto">
-          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
-            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
-            <p className="text-right italic text-sm font-light">quote author</p>
-          </li>
-          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
-            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
-            <p className="text-right italic text-sm font-light">quote author</p>
-          </li>
-          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
-            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
-            <p className="text-right italic text-sm font-light">quote author</p>
-          </li>
-          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
-            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
-            <p className="text-right italic text-sm font-light">quote author</p>
-          </li>
-          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
-            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
-            <p className="text-right italic text-sm font-light">quote author</p>
-          </li>
-          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
-            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
-            <p className="text-right italic text-sm font-light">quote author</p>
-          </li>
+          {quoteContext.items.map((quote, index) => {
+            return (
+              <li className="rounded-lg bg-stone-200 py-3 px-4 my-3" key={index}>
+                <p className="text-sm font-semibold">
+                  {quote.content}
+                </p>
+                <p className="text-right italic text-sm font-light">
+                  {quote.author}
+                </p>
+              </li>
+            );
+          })}
         </ul>
         <div className="modal-action">
           <form method="dialog">
