@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
+
 import Header from "./components/Header";
 import QuoteDisplay from "./components/QuoteDisplay";
 import Spinner from "./components/Spinner";
-import QuoteHistory from "./components/QuoteHistory";
+import QuoteHistoryButton from "./components/QuoteHistoryButton";
+import { QuoteHistory } from "./components/QuoteHistory";
+
 
 const quoteAPI = "https://api.quotable.io/random";
 
@@ -38,12 +42,19 @@ function App() {
       });
     }
   }, [quote]);
+
+  const modal = useRef();
+
+  function handleHistoryModalOpen(){
+    modal.current.open();
+  }
   
   return (
     <>
       <Header />
       { quote ? <QuoteDisplay quote={quote} handleSetQuote={setQuote} /> : <Spinner />}
-      <QuoteHistory />
+      <QuoteHistoryButton openModal={handleHistoryModalOpen} />
+      <QuoteHistory ref={modal} />
     </>
   );
 }

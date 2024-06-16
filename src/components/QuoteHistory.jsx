@@ -1,19 +1,52 @@
-import HistoryIcon from '../assets/history.svg';
+import { useImperativeHandle, forwardRef, useRef } from "react";
 
 
-export default function QuoteHistory() {
+export const QuoteHistory = forwardRef(function QuoteHistoryModal(props, ref) {
+  const dialog = useRef();
+
+  useImperativeHandle(ref, () => {
+    return {
+      open: () => dialog.current.showModal(),
+    };
+  });
+
   return (
-    <div data-dial-init class="fixed start-6 bottom-6 group">
-      <button
-        type="button"
-        data-dial-toggle="speed-dial-menu-square"
-        aria-controls="speed-dial-menu-square"
-        aria-expanded="false"
-        class="flex items-center justify-center text-white bg-stone-500 rounded-lg w-14 h-14 hover:bg-stone-600"
-      >
-        <img src={HistoryIcon} className="w-5 h-5 transition-transform group-hover:scale-125" />
-        <span class="sr-only">Open actions menu</span>
-      </button>
-    </div>
+    <dialog id="my_modal_1" className="modal" ref={dialog}>
+      <div className="modal-box">
+        <h1 className="text-2xl font-bold">History</h1>
+        <ul className="w-11/12 max-h-96 h-fit overflow-auto my-7 mx-auto">
+          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
+            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
+            <p className="text-right italic text-sm font-light">quote author</p>
+          </li>
+          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
+            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
+            <p className="text-right italic text-sm font-light">quote author</p>
+          </li>
+          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
+            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
+            <p className="text-right italic text-sm font-light">quote author</p>
+          </li>
+          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
+            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
+            <p className="text-right italic text-sm font-light">quote author</p>
+          </li>
+          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
+            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
+            <p className="text-right italic text-sm font-light">quote author</p>
+          </li>
+          <li className="rounded-lg bg-stone-200 py-3 px-4 my-3">
+            <p className="text-sm font-semibold">quote text quote text quote text uote text quote text quote text uote text quote text quote text </p>
+            <p className="text-right italic text-sm font-light">quote author</p>
+          </li>
+        </ul>
+        <div className="modal-action">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
   );
-}
+});
