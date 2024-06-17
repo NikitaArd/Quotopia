@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef, useContext } from "react";
+import { Fragment } from "react";
 
 
 import Header from "./components/Header";
@@ -8,7 +9,10 @@ import QuoteHistoryButton from "./components/QuoteHistoryButton";
 import { QuoteHistory } from "./components/QuoteHistory";
 
 
-import { QuoteHistoryContext } from "./store/quote-history-context";
+// import { QuoteHistoryContext } from "./store/quote-history-context";
+
+import { useDispatch } from "react-redux";
+import { QuoteHistoryActions } from "./store";
 
 
 const quoteAPI = "https://api.quotable.io/random";
@@ -16,10 +20,12 @@ const quoteAPI = "https://api.quotable.io/random";
 
 function App() {
   const [quote, setQuote] = useState(null);
-  const quoteHistory = useContext(QuoteHistoryContext);
+  // const quoteHistory = useContext(QuoteHistoryContext);
+  const dispatch = useDispatch();
 
   function handleSetQuote(quote){
-    quoteHistory.appendQuote(quote);
+    // quoteHistory.appendQuote(quote);
+    dispatch(QuoteHistoryActions.appendQuote(quote));
     setQuote(quote);
   }
 
