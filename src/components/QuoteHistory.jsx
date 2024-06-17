@@ -1,11 +1,12 @@
-import { useImperativeHandle, forwardRef, useRef, useContext } from "react";
+import { useImperativeHandle, forwardRef, useRef } from "react";
 
-import { QuoteHistoryContext } from "../store/quote-history-context";
+import { useSelector } from "react-redux";
+
 
 export const QuoteHistory = forwardRef(function QuoteHistoryModal(props, ref) {
   const dialog = useRef();
 
-  const quoteContext = useContext(QuoteHistoryContext);
+  const quoteHistoryItems = useSelector(state => state.items);
 
   useImperativeHandle(ref, () => {
     return {
@@ -18,7 +19,7 @@ export const QuoteHistory = forwardRef(function QuoteHistoryModal(props, ref) {
       <div className="modal-box">
         <h1 className="text-2xl font-bold">History</h1>
         <ul className="w-11/12 max-h-96 h-fit overflow-auto my-7 mx-auto">
-          {quoteContext.items.map((quote, index) => {
+          {quoteHistoryItems.map((quote, index) => {
             return (
               <li className="rounded-lg bg-stone-200 py-3 px-4 my-3" key={index}>
                 <p className="text-sm font-semibold">
@@ -33,7 +34,6 @@ export const QuoteHistory = forwardRef(function QuoteHistoryModal(props, ref) {
         </ul>
         <div className="modal-action">
           <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
             <button className="btn">Close</button>
           </form>
         </div>
